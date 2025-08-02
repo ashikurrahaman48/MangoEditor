@@ -1,0 +1,140 @@
+{
+  "name": "JavaScript",
+  "file_extensions": [".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx"],
+  "keywords": {
+    "primary": [
+      "break", "case", "catch", "class", "const", "continue", "debugger",
+      "default", "delete", "do", "else", "export", "extends", "finally",
+      "for", "function", "if", "import", "in", "instanceof", "new",
+      "return", "super", "switch", "this", "throw", "try", "typeof",
+      "var", "void", "while", "with", "yield", "async", "await"
+    ],
+    "secondary": [
+      "true", "false", "null", "undefined", "NaN", "Infinity",
+      "let", "static", "private", "protected", "public", "readonly",
+      "interface", "type", "implements", "namespace", "enum", "abstract",
+      "as", "is", "satisfies"
+    ],
+    "operators": [
+      "=>", "...", "?", "??", "?.", "||", "&&", "|", "&", "^", "~",
+      "===", "!==", "==", "!=", "<=", ">=", "<<", ">>", ">>>",
+      "**", "++", "--", "&&=", "||=", "??="
+    ],
+    "modern": [
+      "toSorted", "toReversed", "findLast", "with", "at"
+    ]
+  },
+  "comments": {
+    "line": "//",
+    "block": { "start": "/*", "end": "*/" },
+    "doc": { "start": "/**", "end": "*/" }
+  },
+  "strings": {
+    "delimiters": ["\"", "'", "`"],
+    "escape_chars": "\\",
+    "template_literals": true,
+    "tagged_templates": true
+  },
+  "numbers": {
+    "integer": true,
+    "float": true,
+    "hex": true,
+    "binary": true,
+    "octal": true
+  },
+  "highlighting_rules": [
+    {
+      "name": "Function/Class",
+      "pattern": "\\b(function|class)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+      "capture_group": 2,
+      "style": {
+        "color": "#4EC9B0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Arrow Functions",
+      "pattern": "([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\=>)",
+      "style": {
+        "color": "#DCDCAA"
+      }
+    },
+    {
+      "name": "Template Literals",
+      "pattern": "\\${([^}]*)}",
+      "capture_group": 1,
+      "style": {
+        "color": "#CE9178"
+      }
+    },
+    {
+      "name": "Decorators",
+      "pattern": "@[A-Za-z_][A-Za-z0-9_]*",
+      "style": {
+        "color": "#C586C0",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "JSX Components",
+      "pattern": "<([A-Z][A-Za-z0-9_]*)",
+      "capture_group": 1,
+      "style": {
+        "color": "#569CD6"
+      }
+    },
+    {
+      "name": "Modern JS Features",
+      "pattern": "\\b(toSorted|toReversed|findLast|with|at)\\b",
+      "style": {
+        "color": "#FF8C00"
+      }
+    }
+  ],
+  "special_rules": {
+    "typescript": {
+      "type_annotations": {
+        "pattern": ":\\s*([A-Za-z_][A-Za-z0-9_]*)",
+        "style": {
+          "color": "#4FC1FF"
+        }
+      },
+      "generics": {
+        "pattern": "<[A-Z][A-Za-z0-9_]*>",
+        "style": {
+          "color": "#4EC9B0"
+        }
+      }
+    },
+    "react_hooks": {
+      "pattern": "\\b(use[A-Z][A-Za-z0-9_]*)",
+      "style": {
+        "color": "#FFD700"
+      }
+    },
+    "console_methods": {
+      "pattern": "console\\.(log|warn|error|info)",
+      "style": {
+        "color": "#9CDCFE"
+      }
+    },
+    "testing": {
+      "pattern": "\\b(describe|it|test|expect)\\b",
+      "style": {
+        "color": "#FF4081"
+      }
+    }
+  },
+  "theme_adaptations": {
+    "dark": {
+      "jsx_color": "#569CD6",
+      "template_color": "#CE9178",
+      "function_color": "#4EC9B0"
+    },
+    "light": {
+      "jsx_color": "#0451A5",
+      "template_color": "#A31515",
+      "function_color": "#795E26"
+    }
+  }
+}
