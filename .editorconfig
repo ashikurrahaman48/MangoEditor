@@ -1,0 +1,121 @@
+# MangoEditor - সম্পূর্ণ EditorConfig কনফিগারেশন
+# বাংলাদেশী ডেভেলপারদের জন্য বিশেষভাবে তৈরি
+
+root = true
+
+### গ্লোবাল সেটিংস ###
+[*]
+charset = utf-8                  # UTF-8 এনকোডিং (বাংলা সাপোর্ট)
+end_of_line = lf                 # Unix-style line endings
+insert_final_newline = true      # ফাইলের শেষে নতুন লাইন
+trim_trailing_whitespace = true  # ট্রেইলিং স্পেস ট্রিম
+
+### সোর্স কোড ফরম্যাটিং ###
+[*.{cpp,cc,cxx,hpp,h,hxx,ino}]
+indent_style = space
+indent_size = 4
+tab_width = 4
+max_line_length = 100
+
+[*.{py}]
+indent_style = space
+indent_size = 4
+max_line_length = 88
+
+[*.{js,ts,jsx,tsx}]
+indent_style = space
+indent_size = 2
+max_line_length = 100
+
+### কনফিগ ফাইল ###
+[*.{json,yml,yaml,toml}]
+indent_style = space
+indent_size = 2
+
+[CMakeLists.txt]
+indent_style = space
+indent_size = 2
+
+### স্ক্রিপ্টিং ফাইল ###
+[*.{sh,bash}]
+indent_style = tab
+indent_size = 4
+shell_variant = bash
+
+### Qt স্পেসিফিক ###
+[*.{ui,qrc,qml}]
+indent_style = space
+indent_size = 2
+
+[*.pro]
+indent_style = space
+indent_size = 2
+tab_width = 2
+
+### ডকুমেন্টেশন ###
+[*.{md,markdown,mdwn,txt}]
+trim_trailing_whitespace = false
+max_line_length = 80
+
+[*.{bn.md,bn.txt}]
+max_line_length = 72  # বাংলা টেক্সটের জন্য আদর্শ
+
+### বাংলাদেশী স্পেসিফিক ###
+[*.{bn.ini,bn.cfg}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+
+[*.{bn.py,bn.js}]
+charset = utf-8
+indent_style = space
+indent_size = 4
+
+### IDE/এডিটর স্পেসিফিক ###
+[.vscode/*]
+indent_style = space
+indent_size = 2
+
+[.idea/*]
+indent_style = space
+indent_size = 2
+
+### বিশেষ ফাইল টাইপ ###
+[Makefile]
+indent_style = tab
+tab_width = 4
+
+[Dockerfile]
+indent_style = space
+indent_size = 2
+
+[*.{diff,patch}]
+trim_trailing_whitespace = false
+
+### টেস্ট ফাইল ###
+[test/*]
+indent_style = space
+indent_size = 2
+
+[*.test.js]
+indent_style = space
+indent_size = 2
+
+### Git কনফিগ ###
+[.gitattributes]
+indent_style = space
+indent_size = 2
+
+[.gitignore]
+indent_style = space
+indent_size = 2
+
+### বাংলা ভাষা সাপোর্ট ###
+[*.{bn}]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+max_line_length = 72
