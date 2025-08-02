@@ -1,0 +1,133 @@
+{
+  "name": "Java",
+  "file_extensions": [".java"],
+  "keywords": {
+    "primary": [
+      "abstract", "assert", "break", "case", "catch", "class", "const",
+      "continue", "default", "do", "else", "enum", "extends", "final",
+      "finally", "for", "goto", "if", "implements", "import", "instanceof",
+      "interface", "native", "new", "package", "private", "protected",
+      "public", "return", "static", "strictfp", "super", "switch",
+      "synchronized", "this", "throw", "throws", "transient", "try",
+      "volatile", "while"
+    ],
+    "secondary": [
+      "boolean", "byte", "char", "double", "float", "int", "long",
+      "short", "void", "var", "record", "sealed", "non-sealed", "permits"
+    ],
+    "annotations": [
+      "@Override", "@Deprecated", "@SuppressWarnings", "@SafeVarargs",
+      "@FunctionalInterface", "@Retention", "@Target", "@Documented",
+      "@Inherited", "@Repeatable"
+    ],
+    "modern": [
+      "record", "sealed", "var", "yield"
+    ]
+  },
+  "comments": {
+    "line": "//",
+    "block": { "start": "/*", "end": "*/" },
+    "doc": { "start": "/**", "end": "*/" }
+  },
+  "strings": {
+    "delimiters": ["\"", "'"],
+    "escape_chars": "\\",
+    "text_blocks": true,
+    "multi_line": true
+  },
+  "numbers": {
+    "integer": true,
+    "float": true,
+    "hex": true,
+    "binary": true,
+    "underscores": true
+  },
+  "highlighting_rules": [
+    {
+      "name": "Class/Interface/Enum",
+      "pattern": "\\b(class|interface|enum|record)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+      "capture_group": 2,
+      "style": {
+        "color": "#4EC9B0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Method Definitions",
+      "pattern": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()",
+      "style": {
+        "color": "#DCDCAA"
+      }
+    },
+    {
+      "name": "Annotations",
+      "pattern": "@[A-Za-z_][A-Za-z0-9_]*",
+      "style": {
+        "color": "#C586C0",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Constants",
+      "pattern": "\\b[A-Z_][A-Z0-9_]*\\b",
+      "style": {
+        "color": "#569CD6"
+      }
+    },
+    {
+      "name": "Type Parameters",
+      "pattern": "<[A-Z][A-Za-z0-9_]*>",
+      "style": {
+        "color": "#4FC1FF"
+      }
+    },
+    {
+      "name": "Modern Java Features",
+      "pattern": "\\b(record|sealed|var|yield)\\b",
+      "style": {
+        "color": "#FF8C00",
+        "fontStyle": "bold"
+      }
+    }
+  ],
+  "special_rules": {
+    "text_blocks": {
+      "pattern": "\"\"\"[\\s\\S]*?\"\"\"",
+      "style": {
+        "color": "#CE9178",
+        "fontStyle": "italic"
+      }
+    },
+    "module_system": {
+      "keywords": ["module", "requires", "exports", "opens", "to", "uses", "provides", "with"],
+      "style": {
+        "color": "#FFD700"
+      }
+    },
+    "lambda_expressions": {
+      "pattern": "\\([^)]*\\)\\s*->",
+      "style": {
+        "color": "#C586C0"
+      }
+    },
+    "spring_annotations": {
+      "pattern": "@(RestController|Service|Repository|Autowired)",
+      "style": {
+        "color": "#6A8759",
+        "fontStyle": "bold"
+      }
+    }
+  },
+  "theme_adaptations": {
+    "dark": {
+      "class_color": "#4EC9B0",
+      "annotation_color": "#C586C0",
+      "method_color": "#DCDCAA"
+    },
+    "light": {
+      "class_color": "#267F99",
+      "annotation_color": "#AF00DB",
+      "method_color": "#795E26"
+    }
+  }
+}
