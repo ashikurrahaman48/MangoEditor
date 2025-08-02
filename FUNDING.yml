@@ -1,0 +1,90 @@
+# =============================================
+# 🥭 MangoEditor Funding Configuration
+# =============================================
+
+# Official GitHub Sponsors
+github: mangoeditor  # GitHub organization username
+
+# Global Sponsorship Platforms
+patreon: mangoeditor          # Monthly membership
+open_collective: mangoeditor  # Transparent finances
+ko_fi: mangoeditor            # One-time coffee donations
+liberapay: mangoeditor        # Recurring donations
+tidelift: mangoeditor         # Enterprise support
+issuehunt: mangoeditor        # Bounty platform
+otechie: mangoeditor          # Developer sponsorship
+
+# =============================================
+# 🌍 Custom Funding Links
+# =============================================
+custom:
+  - "https://mangoeditor.org/donate"          # Direct donations
+  - "https://mangoeditor.org/sponsor"         # Corporate sponsorship
+  - "https://mangoeditor.org/community-fund"  # Community funding
+  - "https://mangoeditor.org/ads"             # Advertisement opportunities
+
+# =============================================
+# 🇧🇩 Bangladesh Local Payment Options
+# =============================================
+local_funding:
+  mobile:
+    bKash: "+880XXXXXXXXX"  # bKash personal payment
+    Nagad: "+880XXXXXXXXX"  # Nagad payment
+    Rocket: "+880XXXXXXXXX" # Rocket payment
+  
+  bank:
+    name: "MangoSoft Bangladesh"
+    branch: "Mirpur Branch, Dhaka"
+    account_type: "Current Account"
+    account_number: "123456789"
+    routing_number: "020XXXXXXXX"
+    swift_code: "BBBDHKAXXXX"
+  
+  crypto:
+    bitcoin: "3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5"
+    usdt: "TXYZ12345678901234567890"
+
+# =============================================
+# 💼 Sponsorship Tiers
+# =============================================
+tiers:
+  - "🥭 Individual Supporter ($5-20/month)"
+  - "🚀 Active Maintainer ($50-100/month)"
+  - "🏢 Corporate Sponsor ($500+/month)"
+  - "🇧🇩 Bangladeshi Community Tier (৳500-5000)"
+
+# =============================================
+# 🤝 Special Programs
+# =============================================
+programs:
+  university:
+    url: "https://mangoeditor.org/edu"
+    description: "Academic institution partnership"
+  
+  foss:
+    url: "https://mangoeditor.org/foss-fund"
+    description: "FOSS sustainability fund"
+  
+  feature_bounty:
+    url: "https://mangoeditor.org/bounties"
+    description: "Feature development bounties"
+
+# =============================================
+# 📬 Contact Information
+# =============================================
+contact:
+  email: funding@mangoeditor.org
+  phone: "+880XXXXXXXXX"  # Bangladeshi contact
+  emergency: "security@mangoeditor.org"  # For large donations
+
+# =============================================
+# ℹ️ Additional Notes
+# =============================================
+notes:
+  - "Recurring donors get priority support"
+  - "Corporate sponsors receive logo placement"
+  - "Bangladeshi donors get local tax receipts"
+  - "All donations fund open source development"
+
+# Last Updated: January 2024
+# Config Version: 2.1
