@@ -1,0 +1,143 @@
+{
+  "name": "C++",
+  "file_extensions": [".cpp", ".hpp", ".cc", ".h", ".cxx", ".hxx", ".ino"],
+  "keywords": {
+    "primary": [
+      "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel", 
+      "atomic_commit", "atomic_noexcept", "auto", "bitand", "bitor", 
+      "break", "case", "catch", "class", "compl", "concept", "const", 
+      "consteval", "constexpr", "constinit", "const_cast", "continue", 
+      "co_await", "co_return", "co_yield", "decltype", "default", "delete", 
+      "do", "dynamic_cast", "else", "explicit", "export", "extern", "false", 
+      "final", "for", "friend", "goto", "if", "import", "inline", "module", 
+      "mutable", "namespace", "new", "noexcept", "not", "not_eq", "nullptr", 
+      "operator", "or", "or_eq", "override", "private", "protected", "public", 
+      "reflexpr", "register", "reinterpret_cast", "requires", "return", 
+      "sizeof", "static", "static_assert", "static_cast", "struct", 
+      "switch", "synchronized", "template", "this", "thread_local", "throw", 
+      "true", "try", "typedef", "typeid", "typename", "union", "using", 
+      "virtual", "volatile", "while", "xor", "xor_eq"
+    ],
+    "secondary": [
+      "bool", "char", "char8_t", "char16_t", "char32_t", "double", "float", 
+      "int", "long", "short", "signed", "unsigned", "void", "wchar_t"
+    ],
+    "operators": [
+      "+", "-", "*", "/", "%", "=", "==", "!=", "<", ">", "<=", ">=", 
+      "&&", "||", "!", "&", "|", "^", "~", "<<", ">>", "++", "--", "->", 
+      ".", "::", "?", ":", ".*", "->*"
+    ],
+    "modern": [
+      "concept", "requires", "co_await", "co_return", 
+      "consteval", "constinit", "reflexpr"
+    ]
+  },
+  "comments": {
+    "line": "//",
+    "block": { "start": "/*", "end": "*/" }
+  },
+  "strings": {
+    "delimiters": ["\"", "'", "R\"", "u8\"", "u\"", "U\""],
+    "escape_chars": "\\",
+    "raw_strings": true,
+    "triple_quotes": false
+  },
+  "numbers": {
+    "integer": true,
+    "float": true,
+    "hex": true,
+    "binary": true,
+    "scientific": true,
+    "suffixes": ["u", "l", "ll", "f", "ul", "ull"]
+  },
+  "preprocessor": {
+    "prefix": "#",
+    "directives": [
+      "include", "define", "undef", "if", "ifdef", "ifndef", "else", 
+      "elif", "endif", "line", "error", "pragma", "warning", "_Pragma"
+    ]
+  },
+  "highlighting_rules": [
+    {
+      "name": "Function Definitions",
+      "pattern": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\s*(?=\\()",
+      "style": {
+        "color": "#DCDCAA",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Class/Struct/Enum",
+      "pattern": "\\b(class|struct|enum)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+      "capture_group": 2,
+      "style": {
+        "color": "#4EC9B0",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Template Parameters",
+      "pattern": "<[^>]+>",
+      "style": {
+        "color": "#569CD6"
+      }
+    },
+    {
+      "name": "User-defined Literals",
+      "pattern": "\\b[0-9]+(\\.[0-9]+)?[a-zA-Z_][a-zA-Z0-9_]*\\b",
+      "style": {
+        "color": "#B5CEA8"
+      }
+    },
+    {
+      "name": "Lambda Expressions",
+      "pattern": "\\[([^\\]]*)\\]\\(([^\\)]*)\\)",
+      "style": {
+        "color": "#C586C0"
+      }
+    },
+    {
+      "name": "Modern C++ Features",
+      "pattern": "\\b(concept|requires|co_await|co_return|consteval|constinit|reflexpr)\\b",
+      "style": {
+        "color": "#FF8C00",
+        "fontStyle": "bold"
+      }
+    }
+  ],
+  "special_rules": {
+    "attributes": {
+      "pattern": "\\[\\[([^\\]]+)\\]\\]",
+      "style": {
+        "color": "#FFD700",
+        "fontStyle": "bold"
+      }
+    },
+    "raw_strings": {
+      "pattern": "R\"([^(]*)\\([^)]*\\)\\1\"",
+      "style": {
+        "color": "#CE9178",
+        "fontStyle": "italic"
+      }
+    },
+    "standard_library": {
+      "containers": ["vector", "map", "set", "unordered_map", "unordered_set"],
+      "algorithms": ["sort", "find", "transform", "copy", "move"],
+      "style": {
+        "color": "#9CDCFE"
+      }
+    }
+  },
+  "theme_adaptations": {
+    "dark": {
+      "function_color": "#DCDCAA",
+      "class_color": "#4EC9B0",
+      "template_color": "#569CD6"
+    },
+    "light": {
+      "function_color": "#795E26",
+      "class_color": "#267F99",
+      "template_color": "#0451A5"
+    }
+  }
+}
