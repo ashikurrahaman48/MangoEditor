@@ -1,0 +1,109 @@
+{
+  "name": "Markdown",
+  "file_extensions": [".md", ".markdown", ".mdx"],
+  "highlighting_rules": [
+    {
+      "name": "Headers",
+      "pattern": "^(#{1,6})\\s+(.*)$",
+      "capture_group": 2,
+      "style": {
+        "color": "#569CD6",
+        "fontStyle": "bold",
+        "level": {
+          "1": { "fontScale": 1.8 },
+          "2": { "fontScale": 1.6 },
+          "3": { "fontScale": 1.4 }
+        }
+      }
+    },
+    {
+      "name": "Emphasis",
+      "pattern": "(\\*\\*|__)(.*?)\\1|(\\*|_)(.*?)\\3",
+      "capture_group": [2, 4],
+      "style": {
+        "fontStyle": "italic",
+        "bold": true,
+        "color": "#DCDCAA"
+      }
+    },
+    {
+      "name": "Lists",
+      "pattern": "^([*+-]|\\d+\\.)\\s+(.*)$",
+      "capture_group": 2,
+      "style": {
+        "color": "#9CDCFE",
+        "bullet": {
+          "color": "#CE9178"
+        }
+      }
+    },
+    {
+      "name": "Code Blocks",
+      "pattern": "```[\\s\\S]*?```|`[^`]*`",
+      "style": {
+        "color": "#CE9178",
+        "background": "#1E1E1E",
+        "fontFamily": "monospace"
+      }
+    },
+    {
+      "name": "Links",
+      "pattern": "\\[([^\\]]+)\\]\\(([^\\)]+)\\)",
+      "capture_group": 1,
+      "style": {
+        "color": "#4EC9B0",
+        "underline": true
+      }
+    },
+    {
+      "name": "Images",
+      "pattern": "!\\[([^\\]]+)\\]\\(([^\\)]+)\\)",
+      "capture_group": 1,
+      "style": {
+        "color": "#C586C0",
+        "fontStyle": "italic"
+      }
+    }
+  ],
+  "special_rules": {
+    "front_matter": {
+      "pattern": "^---[\\s\\S]*?^---",
+      "style": {
+        "color": "#808080",
+        "fontFamily": "monospace"
+      }
+    },
+    "task_lists": {
+      "pattern": "^\\s*[-*+]\\s*\\[[ xX]\\]",
+      "style": {
+        "color": "#FFD700"
+      }
+    },
+    "inline_math": {
+      "pattern": "\\$([^$]+)\\$",
+      "style": {
+        "color": "#DCDCAA",
+        "background": "#252525"
+      }
+    },
+    "diagrams": {
+      "pattern": "```(mermaid|plantuml)[\\s\\S]*?```",
+      "style": {
+        "color": "#9CDCFE",
+        "background": "#1E1E1E"
+      }
+    }
+  },
+  "theme_adaptations": {
+    "dark": {
+      "header_color": "#569CD6",
+      "code_background": "#1E1E1E",
+      "link_color": "#4EC9B0"
+    },
+    "light": {
+      "header_color": "#0451A5",
+      "code_background": "#F3F3F3",
+      "link_color": "#0569C1"
+    }
+  }
+}
