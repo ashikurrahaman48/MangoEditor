@@ -1,120 +1,190 @@
-# MangoEditor - .gitignore ফাইল
-# Qt/C++ কোড এডিটর প্রজেক্টের জন্য অপ্টিমাইজড
+# MangoEditor - Comprehensive .gitignore
+# বাংলাদেশী ডেভেলপারদের জন্য বিশেষভাবে অপ্টিমাইজড
 
-### IDE এবং এডিটর স্পেসিফিক ফাইল ###
-.vscode/          # VS Code কনফিগারেশন
-.idea/           # JetBrains IDE ফাইল
-*.swp            # Vim টেম্পোরারি ফাইল
-*.swo            # Vim টেম্পোরারি ফাইল
-*~               # Backup ফাইল
-*.kdev4          # KDevelop প্রজেক্ট ফাইল
-*.user           # Qt Creator ইউজার সেটিংস
+### IDE/Editor Specific ###
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-### বিল্ড সিস্টেম এবং এক্সিকিউটেবল ###
-build/           # CMake বিল্ড ডিরেক্টরি
-bin/             # বাইনারি আউটপুট ডিরেক্টরি
-*.exe            # Windows এক্সিকিউটেবল
-*.app            # macOS অ্যাপ্লিকেশন
-*.so             # Linux শেয়ার্ড লাইব্রেরি
-*.dll            # Windows ডাইনামিক লাইব্রেরি
-*.a              # স্ট্যাটিক লাইব্রেরি
-*.lib            # Windows লাইব্রেরি
-*.dylib          # macOS ডাইনামিক লাইব্রেরি
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
 
-### কম্পাইলেশন আর্টিফ্যাক্টস ###
-*.o              # অবজেক্ট ফাইল
-*.obj            # Windows অবজেক্ট ফাইল
-*.ko             # Linux কার্নেল অবজেক্ট
-*.gcno           # Gcov কভারেজ ডাটা
-*.gcda           # Gcov কভারেজ ডাটা
-*.elf            # এমবেডেড ELF ফাইল
+# Qt Creator
+*.user
+*.user.*
 
-### Qt স্পেসিফিক জেনারেটেড ফাইল ###
-Makefile         # অটো-জেনারেটেড Makefile
-moc_*.cpp        # Qt মেটা-অবজেক্ট কম্পাইলার আউটপুট
-qrc_*.cpp        # Qt রিসোর্স কম্পাইলার আউটপুট
-ui_*.h           # Qt UI কম্পাইলার আউটপুট
-*.moc            # Qt মেটা-অবজেক্ট ফাইল
-*.qm             # Qt ট্রান্সলেশন ফাইল
+# Other Editors
+*.swp
+*.swo
+*~
+*.kdev4
+*.sublime-workspace
+*.sublime-project
 
-### CMake জেনারেটেড ফাইল ###
+### Build Artifacts ###
+# Executables
+bin/
+build/
+dist/
+*.exe
+*.exe~
+*.app
+*.so
+*.so.*
+*.dll
+*.a
+*.lib
+*.dylib
+
+# Compiled Object Files
+*.o
+*.obj
+*.ko
+*.gcno
+*.gcda
+*.elf
+
+### Qt Specific ###
+# Auto-generated files
+Makefile*
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+*.moc
+*.qm
+
+# Qt Creator build directories
+*-Build-*
+
+### CMake Generated Files ###
 CMakeCache.txt
 CMakeFiles/
+CMakeScripts/
 cmake_install.cmake
 install_manifest.txt
 CTestTestfile.cmake
 *.cmake
-*.ninja         # Ninja বিল্ড সিস্টেম
+*.ninja
 .ninja_deps
 .ninja_log
+compile_commands.json
 
-### ডিপেন্ডেন্সি ম্যানেজমেন্ট ###
-thirdparty/downloads/  # ডাউনলোডেড ডিপেন্ডেন্সি
-deps/                 # লোকালি বিল্ট ডিপেন্ডেন্সি
+### Dependency Management ###
+thirdparty/downloads/
+deps/
+.vcpkg/
+conanbuildinfo.*
+conaninfo.txt
 
-### লগ এবং টেস্টিং আউটপুট ###
-*.log            # অ্যাপ্লিকেশন লগ ফাইল
-*.trs            # অটোটেস্ট রেজাল্ট
-test-results/    # টেস্ট রেজাল্ট ডিরেক্টরি
+### Logs and Test Output ###
+*.log
+*.trs
+test-results/
+*.tlog
+*.lastbuildstate
 
-### প্যাকেজিং আর্টিফ্যাক্টস ###
-*.deb           # Debian প্যাকেজ
-*.rpm           # RPM প্যাকেজ
-*.msi           # Windows ইন্সটলার
-*.dmg           # macOS ডিস্ক ইমেজ
-*.tar.gz        # Tarball আর্কাইভ
-*.zip           # জিপ আর্কাইভ
-*.7z            # 7-Zip আর্কাইভ
+### Package Files ###
+*.deb
+*.rpm
+*.msi
+*.dmg
+*.tar.gz
+*.zip
+*.7z
+*.snap
 
-### অপারেটিং সিস্টেম স্পেসিফিক ###
-.DS_Store       # macOS ফাইন্ডার সেটিংস
+### System Files ###
+# macOS
+.DS_Store
 .DS_Store?
 ._*
 .Spotlight-V100
 .Trashes
-ehthumbs.db    # Windows থাম্বনেইল ক্যাশে
-Thumbs.db      # Windows থাম্বনেইল ক্যাশে
-desktop.ini    # Windows ফোল্ডার কনফিগ
+ehthumbs.db
 
-### এনভায়রনমেন্ট কনফিগ ###
-.env            # এনভায়রনমেন্ট ভেরিয়েবল
-.env.local      # লোকাল ডেভেলপমেন্ট কনফিগ
-.env.test       # টেস্টিং কনফিগ
+# Windows
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
 
-### ডাটাবেস এবং স্টোরেজ ###
-*.db            # ডাটাবেস ফাইল
-*.sqlite        # SQLite ডাটাবেস
-*.sqlite3       # SQLite3 ডাটাবেস
+# Linux
+.fuse_hidden*
 
-### Python ইন্টিগ্রেশন (যদি থাকে) ###
-__pycache__/    # Python বাইটকোড ক্যাশে
-*.py[cod]       # Python কম্পাইলড ফাইল
-*$py.class      # Jython কম্পাইলড ফাইল
+### Environment Variables ###
+.env
+.env.local
+.env.development
+.env.test
+.env.production
 
-### ইউজার স্পেসিফিক কনফিগ ###
-*.userprefs     # ইউজার প্রেফারেন্স ফাইল
+### Database and Local Storage ###
+*.db
+*.sqlite
+*.sqlite3
+*.fdb
+*.mdb
 
-### ডিবাগিং সিম্বল ###
-*.pdb           # প্রোগ্রাম ডাটাবেস
-*.idb           # MSVC ইন্টারমিডিয়েট ডিবাগ
-*.ilk           # ইনক্রিমেন্টাল লিংক ফাইল
-*.exp           # এক্সপোর্ট ফাইল
-*.suo           # Visual Studio ব্যবহারকারী অপশন
-*.sdf           # Visual Studio IntelliSense
-*.opensdf       # Visual Studio SQL সার্ভার
-*.VC.db         # Visual Studio ক্যাশে
-*.VC.VC.opendb  # Visual Studio ক্যাশে
+### Python Cache ###
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
 
-### কভারেজ রিপোর্ট ###
-coverage/       # কোড কভারেজ রিপোর্ট
-*.gcov          # Gcov আউটপুট
-*.lcov          # Lcov আউটপুট
+### User Specific Configs ###
+*.userprefs
+*.suo
+*.userosscache
+*.sln.docstates
 
-### প্রোফাইলিং ডাটা ###
-*.prof          # প্রোফাইলিং ডাটা
-*.ps            # PostScript প্রোফাইল
+### Debug Symbols ###
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.vc.db
+*.VC.VC.opendb
 
-### বাংলাদেশী ডেভেলপারদের জন্য বিশেষ ###
-/resources/dictionaries/.cache/  # বাংলা ডিকশনারি ক্যাশে
-/local_payment_config.ini        # বাংলাদেশী পেমেন্ট কনফিগ
-/bangla_nlp_models/             # বাংলা NLP মডেল ক্যাশে
+### Coverage Reports ###
+coverage/
+*.gcov
+*.lcov
+*.gcda
+*.gcno
+
+### Profiling Data ###
+*.prof
+*.ps
+*.callgrind
+*.cache
+
+### Bangladesh Specific ###
+# বাংলা ভাষা মডেল ক্যাশে
+/resources/nlp/.cache/
+
+# বাংলাদেশী পেমেন্ট ইন্টিগ্রেশন টেস্ট ডাটা
+/local_payment_testdata.json
+
+# স্থানীয় কনফিগারেশন ফাইল
+/local_config.ini
+/local_settings.bn.ini
+
+# বাংলা ডকুমেন্টেশন বিল্ড আউটপুট
+/docs/_build/
+/docs/bn/_build/
+
+### Custom Project Specific ###
+# Plugin Development
+/plugins/*/build/
+/plugins/*/bin/
+
+# Temporary Files
+*.tmp
+*.temp
+*~
