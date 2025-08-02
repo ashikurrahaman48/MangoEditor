@@ -1,5 +1,3 @@
-Here's a beautifully formatted and well-organized version of your THIRD-PARTY-NOTICES.md file with improved structure and visual presentation:
-
 ```markdown
 <!-- Header with project logo (optional) -->
 <div align="center">
@@ -7,7 +5,7 @@ Here's a beautifully formatted and well-organized version of your THIRD-PARTY-NO
 # 🥭 MangoEditor Third-Party Software Notices  
 # 🥭 ম্যাঙ্গোএডিটর তৃতীয় পক্ষের সফটওয়্যার নোটিশ
 
-**Last Updated:** August 2023 | **সর্বশেষ হালনাগাদ:** আগস্ট ২০২৩  
+**Last Updated:** August 2025 | **সর্বশেষ হালনাগাদ:** আগস্ট ২০২৫  
 
 </div>
 
@@ -122,7 +120,7 @@ thirdparty/
 **পরবর্তী অডিট:** জানুয়ারি ২০২৫  
 
 <div align="center">
-<small>© 2023 MangoEditor | All licenses properly attributed</small>
+<small>© 2025 MangoEditor | All licenses properly attributed</small>
 </div>
 ```
 
