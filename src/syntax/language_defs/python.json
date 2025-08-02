@@ -1,0 +1,122 @@
+{
+  "name": "Python",
+  "file_extensions": [".py", ".pyw", ".pyi"],
+  "keywords": {
+    "primary": [
+      "False", "None", "True", "and", "as", "assert", "async", "await",
+      "break", "class", "continue", "def", "del", "elif", "else", "except",
+      "finally", "for", "from", "global", "if", "import", "in", "is",
+      "lambda", "nonlocal", "not", "or", "pass", "raise", "return",
+      "try", "while", "with", "yield"
+    ],
+    "secondary": [
+      "int", "float", "str", "bool", "list", "dict", "tuple", "set",
+      "__init__", "__name__", "__main__", "self", "cls"
+    ],
+    "operators": [
+      "+", "-", "*", "/", "//", "%", "**", "=", "==", "!=", "<", ">", 
+      "<=", ">=", "and", "or", "not", "is", "in", ":="
+    ],
+    "modern": [
+      "match", "case", "_"
+    ]
+  },
+  "comments": {
+    "line": "#",
+    "block": { "start": "\"\"\"", "end": "\"\"\"" }
+  },
+  "strings": {
+    "delimiters": ["\"", "'", "f\"", "f'", "r\"", "r'", "b\"", "b'"],
+    "multi_line": true,
+    "f_strings": true,
+    "raw_strings": true,
+    "byte_strings": true
+  },
+  "numbers": {
+    "integer": true,
+    "float": true,
+    "hex": true,
+    "binary": true,
+    "octal": true,
+    "complex": true,
+    "underscores": true
+  },
+  "highlighting_rules": [
+    {
+      "name": "Function Definitions",
+      "pattern": "\\bdef\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\()",
+      "capture_group": 1,
+      "style": {
+        "color": "#4EC9B0",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Class Definitions",
+      "pattern": "\\bclass\\s+([A-Za-z_][A-Za-z0-9_]*)",
+      "capture_group": 1,
+      "style": {
+        "color": "#569CD6",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Decorators",
+      "pattern": "@[a-zA-Z_][a-zA-Z0-9_]*",
+      "style": {
+        "color": "#C586C0",
+        "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Type Hints",
+      "pattern": "->\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
+      "capture_group": 1,
+      "style": {
+        "color": "#4FC1FF"
+      }
+    },
+    {
+      "name": "Pattern Matching",
+      "pattern": "\\b(match|case)\\b",
+      "style": {
+        "color": "#FF8C00",
+        "fontStyle": "bold"
+      }
+    }
+  ],
+  "special_rules": {
+    "async_await": {
+      "pattern": "\\b(async|await)\\b",
+      "style": {
+        "color": "#FFD700",
+        "fontStyle": "bold"
+      }
+    },
+    "type_hinting": {
+      "pattern": ":\\s*([A-Za-z_][A-Za-z0-9_]*)",
+      "style": {
+        "color": "#4FC1FF"
+      }
+    },
+    "docstrings": {
+      "pattern": "\"\"\"[\\s\\S]*?\"\"\"|'''[\\s\\S]*?'''",
+      "style": {
+        "color": "#608B4E",
+        "fontStyle": "italic"
+      }
+    }
+  },
+  "theme_adaptations": {
+    "dark": {
+      "function_color": "#4EC9B0",
+      "string_color": "#CE9178",
+      "class_color": "#569CD6"
+    },
+    "light": {
+      "function_color": "#795E26",
+      "string_color": "#A31515",
+      "class_color": "#0451A5"
+    }
+  }
+}
