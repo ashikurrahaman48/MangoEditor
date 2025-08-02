@@ -1,0 +1,85 @@
+# MangoEditor - Clang-Tidy কনফিগারেশন
+# ভার্সন: 2.2.0
+# বাংলাদেশী ডেভেলপারদের জন্য বিশেষভাবে অপ্টিমাইজড
+
+### মৌলিক কনফিগারেশন ###
+Checks: >
+  -*,
+  clang-analyzer-*,
+  bugprone-*,
+  performance-*,
+  modernize-*,
+  readability-*,
+  cppcoreguidelines-*,
+  misc-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -cppcoreguidelines-avoid-magic-numbers
+
+WarningsAsErrors: '*'
+HeaderFilterRegex: '(src|include|tests)/.*'
+FormatStyle: file  # .clang-format ফাইল ব্যবহার করবে
+
+### বাংলাদেশী ডেভেলপারদের জন্য বিশেষ নির্দেশনা ###
+BanglaDev:
+  CommentStyle: "# "  # বাংলা কমেন্টের জন্য
+  MaxBanglaLineLength: 72
+  FunctionPrefix: "bn_"
+  ClassPrefix: "Bangla"
+
+### কিভাবে ব্যবহার করবেন ###
+# ১. কমান্ড লাইন থেকে রান:
+#    clang-tidy -p build/ compile_commands.json
+#
+# ২. সম্পূর্ণ প্রজেক্ট চেক করতে:
+#    run-clang-tidy -p build/ -config-file=.clang-tidy.yaml
+#
+# ৩. নির্দিষ্ট ফাইল চেক করতে:
+#    clang-tidy -p build/ src/main.cpp --config-file=.clang-tidy.yaml
+
+### IDE ইন্টিগ্রেশন ###
+# VS Code:
+#   1. "C/C++" এবং "Clang-Tidy" এক্সটেনশন ইন্সটল করুন
+#   2. settings.json এ যোগ করুন:
+#      "clang-tidy.enable": true,
+#      "clang-tidy.configFile": ".clang-tidy.yaml"
+#
+# Qt Creator:
+#   1. Analyze > Clang-Tidy মেনুতে যান
+#   2. "Use config file" চেক করুন
+#   3. কনফিগ ফাইল হিসেবে .clang-tidy.yaml সিলেক্ট করুন
+
+### বাংলাদেশী ডেভেলপারদের জন্য টিপস ###
+# ১. বাংলা কমেন্টের জন্য UTF-8 এনকোডিং ব্যবহার করুন:
+#    // এটি একটি বাংলা কমেন্ট
+#
+# ২. বাংলা স্পেসিফিক কোডের জন্য প্রিফিক্স ব্যবহার করুন:
+#    - ফাংশন: bn_ (যেমন: bn_processBanglaText)
+#    - ক্লাস: Bangla (যেমন: BanglaFontManager)
+#
+# ৩. QT প্রোজেক্টের জন্য:
+#    - Q_OBJECT ম্যাক্রো থাকলে clang-tidy --extra-arg="-DQT_NO_KEYWORDS" ব্যবহার করুন
+
+### নমুনা কোড ###
+SampleCode: |
+  // বাংলা ভাষা সাপোর্ট ক্লাস
+  class BanglaTextProcessor {
+  public:
+    // বাংলা টেক্সট প্রসেসিং ফাংশন
+    void bn_processText(const std::string& bangla_text) {
+      // UTF-8 ভ্যালিডেশন চেক
+      if (!isValidUtf8(bangla_text)) {
+        std::cerr << "অবৈধ বাংলা টেক্সট ইনপুট\n";
+      }
+    }
+  };
+
+### কনফিগারেশন ভেরিফিকেশন ###
+VerifyConfig:
+  Command: clang-tidy --dump-config
+  Expected: |
+    CheckOptions:
+      - key: readability-identifier-naming.FunctionCase
+        value: camelBack
+      - key: BanglaDev.FunctionPrefix
+        value: bn_
