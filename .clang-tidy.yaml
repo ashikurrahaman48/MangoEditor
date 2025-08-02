@@ -1,8 +1,8 @@
-# MangoEditor - Clang-Tidy কনফিগারেশন
-# ভার্সন: 2.2.0
-# বাংলাদেশী ডেভেলপারদের জন্য বিশেষভাবে অপ্টিমাইজড
+# MangoEditor - Clang-Tidy Configuration
+# Version: 2.1.0
+# Optimized for Bangladeshi C++ Developers
 
-### মৌলিক কনফিগারেশন ###
+### Core Configuration ###
 Checks: >
   -*,
   clang-analyzer-*,
@@ -14,72 +14,115 @@ Checks: >
   misc-*,
   -modernize-use-trailing-return-type,
   -readability-magic-numbers,
-  -cppcoreguidelines-avoid-magic-numbers
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-type-vararg,
+  -bugprone-easily-swappable-parameters,
+  -modernize-pass-by-value
 
 WarningsAsErrors: '*'
 HeaderFilterRegex: '(src|include|tests)/.*'
-FormatStyle: file  # .clang-format ফাইল ব্যবহার করবে
+FormatStyle: file  # Uses .clang-format
+SystemHeaders: false
+AnalyzeTemporaryDtors: true
 
-### বাংলাদেশী ডেভেলপারদের জন্য বিশেষ নির্দেশনা ###
-BanglaDev:
-  CommentStyle: "# "  # বাংলা কমেন্টের জন্য
-  MaxBanglaLineLength: 72
-  FunctionPrefix: "bn_"
-  ClassPrefix: "Bangla"
+### Language Standards ###
+CheckOptions:
+  - key:             cppcoreguidelines-prefer-member-initializer.UseAssignment
+    value:           true
+  - key:             modernize-use-nodiscard.ReplacementString
+    value:           '[[nodiscard]]'
+  - key:             modernize-use-using.ReplacementString
+    value:           'using'
 
-### কিভাবে ব্যবহার করবেন ###
-# ১. কমান্ড লাইন থেকে রান:
-#    clang-tidy -p build/ compile_commands.json
-#
-# ২. সম্পূর্ণ প্রজেক্ট চেক করতে:
-#    run-clang-tidy -p build/ -config-file=.clang-tidy.yaml
-#
-# ৩. নির্দিষ্ট ফাইল চেক করতে:
-#    clang-tidy -p build/ src/main.cpp --config-file=.clang-tidy.yaml
+### Naming Conventions ###
+CheckOptions:
+  # General Naming
+  - key:             readability-identifier-naming.ClassCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.StructCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.FunctionCase
+    value:           camelBack
+  - key:             readability-identifier-naming.VariableCase
+    value:           camelBack
+  - key:             readability-identifier-naming.MemberCase
+    value:           m_camelBack
+  - key:             readability-identifier-naming.ConstexprVariableCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.NamespaceCase
+    value:           lower_case
+  - key:             readability-identifier-naming.EnumCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.EnumConstantCase
+    value:           UPPER_CASE
 
-### IDE ইন্টিগ্রেশন ###
-# VS Code:
-#   1. "C/C++" এবং "Clang-Tidy" এক্সটেনশন ইন্সটল করুন
-#   2. settings.json এ যোগ করুন:
-#      "clang-tidy.enable": true,
-#      "clang-tidy.configFile": ".clang-tidy.yaml"
-#
-# Qt Creator:
-#   1. Analyze > Clang-Tidy মেনুতে যান
-#   2. "Use config file" চেক করুন
-#   3. কনফিগ ফাইল হিসেবে .clang-tidy.yaml সিলেক্ট করুন
+  # Bangladesh-specific conventions
+  - key:             readability-identifier-naming.BanglaFunctionPrefix
+    value:           'bn_'  # For Bangla-specific functions
+  - key:             readability-identifier-naming.BanglaClassPrefix
+    value:           'Bangla'  # For Bangla-specific classes
 
-### বাংলাদেশী ডেভেলপারদের জন্য টিপস ###
-# ১. বাংলা কমেন্টের জন্য UTF-8 এনকোডিং ব্যবহার করুন:
-#    // এটি একটি বাংলা কমেন্ট
-#
-# ২. বাংলা স্পেসিফিক কোডের জন্য প্রিফিক্স ব্যবহার করুন:
-#    - ফাংশন: bn_ (যেমন: bn_processBanglaText)
-#    - ক্লাস: Bangla (যেমন: BanglaFontManager)
-#
-# ৩. QT প্রোজেক্টের জন্য:
-#    - Q_OBJECT ম্যাক্রো থাকলে clang-tidy --extra-arg="-DQT_NO_KEYWORDS" ব্যবহার করুন
+### Qt Specific Checks ###
+CheckOptions:
+  - key:             readability-identifier-naming.QtClassCase
+    value:           'Q[A-Z][a-zA-Z0-9]*'
+  - key:             readability-identifier-naming.QtMethodCase
+    value:           'qt_[a-z][a-zA-Z0-9]*'
 
-### নমুনা কোড ###
-SampleCode: |
-  // বাংলা ভাষা সাপোর্ট ক্লাস
-  class BanglaTextProcessor {
-  public:
-    // বাংলা টেক্সট প্রসেসিং ফাংশন
-    void bn_processText(const std::string& bangla_text) {
-      // UTF-8 ভ্যালিডেশন চেক
-      if (!isValidUtf8(bangla_text)) {
-        std::cerr << "অবৈধ বাংলা টেক্সট ইনপুট\n";
-      }
-    }
-  };
+### Performance Optimizations ###
+CheckOptions:
+  - key:             performance-no-int-to-ptr.WarningThreshold
+    value:           1
+  - key:             performance-unnecessary-value-param.AllowedTypes
+    value:           'std::string_view;std::string'
 
-### কনফিগারেশন ভেরিফিকেশন ###
-VerifyConfig:
-  Command: clang-tidy --dump-config
-  Expected: |
+### Modernization Checks ###
+CheckOptions:
+  - key:             modernize-use-auto.MinTypeNameLength
+    value:           10
+  - key:             modernize-avoid-c-arrays.AllowStringArrays
+    value:           true
+
+### Bangladesh-Specific Rules ###
+BanglaSupport:
+  EnableUnicodeCheck: true
+  MaxBanglaCommentLength: 72  # Optimal for Bangla text
+  BanglaFunctionPattern: 'bn_[a-z][a-zA-Z0-9]*'
+  BanglaClassPattern: 'Bangla[A-Z][a-zA-Z0-9]*'
+
+### Suppressions ###
+Suppress: 
+  - "readability-*" # Temporarily suppress for legacy code
+  - "modernize-*"   # Temporarily suppress for legacy code
+
+### Per-File Configurations ###
+PerFileChecks:
+  "src/bangla/*":
+    Checks: >
+      *,
+      -performance-*,
+      -modernize-use-auto
     CheckOptions:
       - key: readability-identifier-naming.FunctionCase
-        value: camelBack
-      - key: BanglaDev.FunctionPrefix
-        value: bn_
+        value: 'bn_[a-z][a-zA-Z0-9]*'
+
+  "include/qt/*":
+    Checks: >
+      *,
+      -cppcoreguidelines-*,
+      -modernize-*
+    CheckOptions:
+      - key: readability-identifier-naming.ClassCase
+        value: 'Q[A-Z][a-zA-Z0-9]*'
+
+### Usage Instructions ###
+# How to run:
+#   clang-tidy -p build/ compile_commands.json
+#
+# IDE Integration:
+#   VS Code: Use clang-tidy extension
+#   Qt Creator: Enable in Analyze > Clang-Tidy
+#
+# Bangladesh Dev Tips:
+#   - Use UTF-8 encoding for Bangla comments
+#   - Prefix Bangla-specific code with 'bn_' or 'Bangla'
