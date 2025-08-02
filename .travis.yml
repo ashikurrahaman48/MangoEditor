@@ -1,0 +1,131 @@
+# MangoEditor - Linux/macOS CI পাইপলাইন (Travis CI)
+# বাংলাদেশী ডেভেলপারদের জন্য বিশেষভাবে কনফিগার করা
+
+language: cpp
+
+# বিল্ড ম্যাট্রিক্স (মাল্টি-প্ল্যাটফর্ম)
+matrix:
+  include:
+    # লিনাক্স কনফিগ (Ubuntu 20.04)
+    - os: linux
+      dist: focal  
+      compiler: gcc
+      env: 
+        - QT_VER=6.5.0  # QT 6 LTS ভার্সন
+        - BUILD_TYPE=Release
+        - CCACHE_DIR=$HOME/.ccache
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test  # GCC-10 এর জন্য
+          packages:
+            - g++-10
+            - cmake
+            - ninja-build
+            - libgl1-mesa-dev
+            - libxcb-xinerama0
+            - ccache
+
+    # macOS কনফিগ (Big Sur)
+    - os: osx
+      osx_image: xcode13.4  # macOS 11.6
+      compiler: clang
+      env:
+        - QT_VER=6.5.0
+        - BUILD_TYPE=Debug
+      addons:
+        homebrew:
+          packages:
+            - cmake
+            - ninja
+            - ccache
+            - qt@6
+          update: true
+
+# ইনস্টলেশন স্টেপ
+install:
+  # Linux-specific setup
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      # GCC-10 সেটআপ
+      sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
+      sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100
+      
+      # QT ডাউনলোড এবং ইনস্টল
+      wget -q https://download.qt.io/archive/qt/${QT_VER%.*}/$QT_VER/qt-opensource-linux-x64-$QT_VER.run
+      chmod +x qt-opensource-linux-x64-$QT_VER.run
+      ./qt-opensource-linux-x64-$QT_VER.run --script ci/qt-installer-script.js --platform minimal -v
+      export PATH=/opt/qt/$QT_VER/gcc_64/bin:$PATH
+      
+      # CCache কনফিগ
+      ccache --max-size=1G
+    else
+      # macOS-specific setup
+      brew install --force qt@6
+      export PATH="/usr/local/opt/qt@6/bin:$PATH"
+      export PATH="/usr/local/opt/ccache/libexec:$PATH"
+    fi
+
+  # কমন ডিপেন্ডেন্সি
+  - git submodule update --init --recursive
+
+# বিল্ড স্টেপ
+script:
+  - mkdir -p build && cd build
+  
+  # CMake কনফিগারেশন
+  - cmake -G Ninja 
+      -DCMAKE_BUILD_TYPE=$BUILD_TYPE 
+      -DCMAKE_PREFIX_PATH=$(qmake -query QT_INSTALL_PREFIX) 
+      -DCMAKE_CXX_COMPILER_LAUNCHER=ccache 
+      ..
+  
+  # বিল্ড রান
+  - cmake --build . --parallel 2
+  
+  # ইউনিট টেস্ট
+  - ctest --output-on-failure --parallel 2
+
+# ক্যাশে ম্যানেজমেন্ট
+cache:
+  ccache: true
+  directories:
+    - $HOME/.ccache
+    - /opt/qt  # QT ইনস্টলেশন ক্যাশে
+    - $HOME/Library/Caches/Homebrew  # macOS brew ক্যাশে
+
+# ডিপ্লয় কনফিগ (GitHub রিলিজে)
+deploy:
+  provider: releases
+  api_key: 
+    secure: $GITHUB_TOKEN_ENCRYPTED
+  file_glob: true
+  file: build/mangoeditor*
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: mangoeditor/mangoeditor
+    condition: $BUILD_TYPE == "Release" && $TRAVIS_OS_NAME == "linux"
+
+# নোটিফিকেশন
+notifications:
+  email:
+    recipients:
+      - dev-team@mangoeditor.org.bd
+    on_success: change  # শুধুমাত্র স্ট্যাটাস চেঞ্জে
+    on_failure: always  # ব্যর্থ হলে সর্বদা
+
+  slack:
+    rooms:
+      secure: $SLACK_WEBHOOK_ENCRYPTED
+    on_success: change
+    on_failure: always
+
+# বিল্ড শেষে হুক
+after_script:
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      ldd build/mangoeditor  # লাইব্রেরি ডিপেন্ডেন্সি চেক
+    else
+      otool -L build/mangoeditor  # macOS লাইব্রেরি চেক
+    fi
