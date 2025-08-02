@@ -1,0 +1,116 @@
+# MangoEditor - Windows CI/CD পাইপলাইন (AppVeyor)
+# বাংলাদেশী ডেভেলপারদের জন্য বিশেষভাবে কনফিগার করা
+
+version: 2.0.0.{build}  # বিল্ড ভার্সনিং ফরম্যাট
+
+# বিল্ড ইমেজ সিলেকশন
+image: Visual Studio 2022  # VS2022 উইন্ডোজ ইমেজ
+
+# পরিবেশ ভেরিয়েবল সেটআপ
+environment:
+  QT_VERSION: 6.5.0  # QT ভার্সন কন্ট্রোল
+  QT_DIR: C:\Qt\%QT_VERSION%\msvc2019_64
+  QT_INSTALLER_URL: https://download.qt.io/archive/qt/6.5/%QT_VERSION%/qt-opensource-windows-x86-%QT_VERSION%.exe
+  PATH: 
+    - C:\Qt\Tools\CMake\bin
+    - C:\Qt\Tools\Ninja
+    - C:\Program Files\Git\bin
+    - ${PATH}
+
+  # এনক্রিপ্টেড সিক্রেটস
+  github_token:
+    secure: ENCRYPTED_GITHUB_TOKEN  # GitHub ডিপ্লয়মেন্ট টোকেন
+
+# বিল্ড কনফিগারেশন ম্যাট্রিক্স
+configuration:
+  - Debug
+  - Release
+
+# ক্যাশে কনফিগ (বিল্ড স্পিড অপ্টিমাইজেশন)
+cache:
+  - C:\Qt -> appveyor.yml  # QT ক্যাশে রিউজ
+
+# ইনস্টলেশন স্টেপ
+install:
+  # ১. QT সাইলেন্ট ইনস্টলেশন
+  - ps: |
+      Write-Host "QT ${env:QT_VERSION} ইনস্টল করা হচ্ছে..."
+      if (-not (Test-Path ${env:QT_DIR})) {
+          Invoke-WebRequest -Uri ${env:QT_INSTALLER_URL} -OutFile "qt-installer.exe"
+          Start-Process -Wait -FilePath "qt-installer.exe" -ArgumentList "--script .\ci\qt-installer-script.js --no-force-installations"
+      } else {
+          Write-Host "QT ইতিমধ্যেই ইনস্টল করা আছে"
+      }
+
+  # ২. বিল্ড টুলস ইনস্টল
+  - choco install cmake ninja -y --no-progress
+
+  # ৩. থার্ড-পার্টি ডিপেন্ডেন্সি
+  - git submodule update --init --recursive
+
+# বিল্ড প্রসেস
+build_script:
+  # বিল্ড ডিরেক্টরি প্রস্তুত
+  - mkdir build
+  - cd build
+
+  # CMake কনফিগারেশন
+  - cmake -G "Ninja" ^
+      -DCMAKE_PREFIX_PATH=%QT_DIR% ^
+      -DCMAKE_BUILD_TYPE=%CONFIGURATION% ^
+      -DENABLE_TESTS=ON ^
+      -DBUILD_WITH_QT6=ON ^
+      ..
+
+  # প্রকল্প বিল্ড
+  - cmake --build . --config %CONFIGURATION% --parallel 4
+
+# টেস্টিং স্টেপ
+test_script:
+  # ইউনিট টেস্ট এক্সিকিউশন
+  - ctest -C %CONFIGURATION% --output-on-failure --parallel 4
+
+  # ম্যানুয়াল টেস্ট (ঐচ্ছিক)
+  - ps: |
+      if ($env:CONFIGURATION -eq "Release") {
+          Start-Process -Wait -FilePath ".\bin\%CONFIGURATION%\mangoeditor.exe" -ArgumentList "--test"
+      }
+
+# আর্টিফ্যাক্ট সংগ্রহ
+artifacts:
+  - path: build\bin\%CONFIGURATION%\mangoeditor.exe
+    name: MangoEditor_%CONFIGURATION%_Windows
+    type: standalone
+
+  - path: build\bin\%CONFIGURATION%\*.pdb
+    name: Debug_Symbols_%CONFIGURATION%
+    type: symbols
+
+# ডিপ্লয়মেন্ট কনফিগ
+deploy:
+  provider: GitHub
+  description: "MangoEditor Windows বাইনারি (${CONFIGURATION})"
+  artifact: MangoEditor_Release_Windows
+  auth_token:
+    secure: $(github_token)
+  tag: $(APPVEYOR_REPO_TAG_NAME)
+  on:
+    branch: master
+    appveyor_repo_tag: true  # শুধুমাত্র ট্যাগড কমিট
+
+# নোটিফিকেশন কনফিগ
+notifications:
+  - provider: Email
+    to:
+      - dev-team@mangoeditor.org.bd
+    on_build_success: true
+    on_build_failure: true
+    on_build_status_changed: true
+
+# স্ক্রিপ্ট হেল্পার ফাংশন
+on_finish:
+  - ps: |
+      if ($env:APPVEYOR_BUILD_STATUS -eq "failed") {
+          Write-Host "##vso[task.logissue type=error]বিল্ড ব্যর্থ হয়েছে!"
+          Add-AppveyorMessage -Category Error -Message "বিল্ড প্রক্রিয়া ব্যর্থ"
+      }
