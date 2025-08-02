@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- ============================================= -->
+    <!-- 🍎 Basic Application Metadata -->
+    <!-- ============================================= -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    
+    <key>CFBundleExecutable</key>
+    <string>${MACOSX_BUNDLE_EXECUTABLE_NAME}</string>
+    
+    <key>CFBundleIconFile</key>
+    <string>${MACOSX_BUNDLE_ICON_FILE}</string>
+    
+    <key>CFBundleIdentifier</key>
+    <string>${MACOSX_BUNDLE_GUI_IDENTIFIER}</string>
+    
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    
+    <key>CFBundleName</key>
+    <string>${MACOSX_BUNDLE_BUNDLE_NAME}</string>
+    
+    <!-- ============================================= -->
+    <!-- 🔢 Version Information -->
+    <!-- ============================================= -->
+    <key>CFBundleShortVersionString</key>
+    <string>${MACOSX_BUNDLE_SHORT_VERSION_STRING}</string>
+    
+    <key>CFBundleVersion</key>
+    <string>${MACOSX_BUNDLE_LONG_VERSION_STRING}</string>
+    
+    <key>CFBundleGetInfoString</key>
+    <string>${MACOSX_BUNDLE_BUNDLE_NAME} ${MACOSX_BUNDLE_SHORT_VERSION_STRING}</string>
+    
+    <!-- ============================================= -->
+    <!-- 🖥 System Requirements -->
+    <!-- ============================================= -->
+    <key>LSMinimumSystemVersion</key>
+    <string>${MACOSX_DEPLOYMENT_TARGET}</string>
+    
+    <key>LSRequiresNativeExecution</key>
+    <true/>
+    
+    <!-- ============================================= -->
+    <!-- © Copyright Information -->
+    <!-- ============================================= -->
+    <key>NSHumanReadableCopyright</key>
+    <string>কপিরাইট © ${MACOSX_BUNDLE_COPYRIGHT} MangoSoft। সর্বস্বত্ব সংরক্ষিত।</string>
+    
+    <!-- ============================================= -->
+    <!-- 🎨 UI Configuration -->
+    <!-- ============================================= -->
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    
+    <key>NSRequiresAquaSystemAppearance</key>
+    <false/>
+    
+    <!-- ============================================= -->
+    <!-- 📄 Document Type Registration -->
+    <!-- ============================================= -->
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>সকল টেক্সট ফাইল</string>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleTypeExtensions</key>
+            <array>
+                <string>*</string>
+            </array>
+            <key>CFBundleTypeIconFile</key>
+            <string>textfile.icns</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>public.text</string>
+                <string>public.source-code</string>
+            </array>
+        </dict>
+    </array>
+    
+    <!-- ============================================= -->
+    <!-- 🔗 URL Scheme Support -->
+    <!-- ============================================= -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>MangoEditor Document URL</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>mangoeditor</string>
+            </array>
+            <key>CFBundleURLIconFile</key>
+            <string>url_icon.icns</string>
+        </dict>
+    </array>
+    
+    <!-- ============================================= -->
+    <!-- 🔒 Security Configuration -->
+    <!-- ============================================= -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    
+    <key>NSAppleEventsUsageDescription</key>
+    <string>স্ক্রিপ্টিং এবং অটোমেশন সক্ষম করতে ইভেন্ট অ্যাক্সেস প্রয়োজন</string>
+    
+    <!-- ============================================= -->
+    <!-- 🆕 macOS Specific Features -->
+    <!-- ============================================= -->
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
+    
+    <key>NSQuitAlwaysKeepsWindows</key>
+    <false/>
+    
+    <key>NSServices</key>
+    <array>
+        <dict>
+            <key>NSMenuItem</key>
+            <dict>
+                <key>default</key>
+                <string>MangoEditor দিয়ে খুলুন</string>
+            </dict>
+            <key>NSMessage</key>
+            <string>openFile</string>
+            <key>NSPortName</key>
+            <string>${MACOSX_BUNDLE_EXECUTABLE_NAME}</string>
+            <key>NSSendTypes</key>
+            <array>
+                <string>public.plain-text</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>
