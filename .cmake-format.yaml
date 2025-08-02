@@ -1,0 +1,116 @@
+# MangoEditor - CMake ফরম্যাট কনফিগারেশন
+# ভার্সন: 2.1.0
+# বাংলাদেশী ডেভেলপারদের জন্য বিশেষভাবে অপ্টিমাইজড
+
+### বেসিক ফরম্যাট সেটিংস ###
+line_width: 80
+tab_size: 2
+max_subgroups_hwrap: 2
+require_valid_layout: true
+fence_pattern: "^\\s*([`~]{3}[`~]*)(.*)$"
+ruler_pattern: "^\\s*[^\\w\\s]{3}.*[^\\w\\s]{3}$"
+
+### কেসিং কনভেনশন ###
+command_case: canonical  # CMake কমান্ডের ক্ষেত্রে লোয়ারকেস
+keyword_case: upper     # কন্ট্রোল কীওয়ার্ডের ক্ষেত্রে আপ্পারকেস
+variable_case: preserve # ভেরিয়েবল কেস অপরিবর্তিত রাখে
+
+### স্পেসিং এবং র্যাপিং ###
+separate_ctrl_name_with_space: true
+separate_fn_name_with_space: true
+dangle_parens: true
+dangle_align: prefix
+min_prefix_chars: 4
+max_prefix_chars: 10
+max_lines_hwrap: 2
+line_ending: unix       # Unix-style line endings (LF)
+
+### সর্টিং এবং অর্গানাইজেশন ###
+enable_sort: true
+autosort: true
+sort_method: natural    # Natural sorting (1, 2, 10)
+order_requires: false
+
+### কমেন্ট ফরম্যাটিং ###
+first_comment_is_literal: true
+literal_comment_pattern: "^\\s*[^#\\s]"
+bullet_char: '*'        # বুলেটেড লিস্টের জন্য
+enum_char: '.'          # এনামারেশনের জন্য
+hashruler:
+  chars: "#"
+  length: 80
+  min_distance: 10
+  line_ending: "\n"
+
+### ফাংশন এবং আর্গুমেন্ট ফরম্যাটিং ###
+fn_args_separator: "\n" # আর্গুমেন্ট আলাদা লাইনে
+fn_args_opts:
+  separate_ctrl_name_with_space: true
+  always_wrap: false
+  force_rhs: false
+
+### কাস্টম কমান্ড রিকগনিশন ###
+additional_commands:
+  # Qt স্পেসিফিক কমান্ড
+  qt5_wrap_ui:
+    kwargs:
+      TARGET: 1
+      SOURCES: '*'
+  qt5_add_resources:
+    kwargs:
+      TARGET: 1
+      SOURCES: '*'
+  
+  # MangoEditor স্পেসিফিক কমান্ড
+  mango_add_plugin:
+    flags: [STATIC, SHARED]
+    kwargs:
+      NAME: 1
+      SOURCES: '*'
+      INCLUDES: '*'
+  
+  mango_enable_bangla:
+    kwargs:
+      FONT_DIR: 1
+      NLP_MODEL: 1
+
+### বাংলাদেশী ডেভেলপমেন্ট স্পেসিফিক ###
+bangla_support:
+  comment_prefix: "# "
+  max_bangla_line_length: 72  # বাংলা টেক্সটের জন্য আদর্শ লাইন লেংথ
+  enable_unicode: true
+
+### পার-ফাইল কনফিগারেশন ###
+per_file:
+  CMakeLists.txt:
+    line_width: 80
+    tab_size: 2
+    emit_final_ruler: true
+  
+  *.cmake:
+    line_width: 80
+    tab_size: 2
+  
+  cmake/BanglaSupport.cmake:
+    line_width: 72  # বাংলা কমেন্টের জন্য বিশেষ সেটিং
+    max_bangla_line_length: 72
+
+### ভিজ্যুয়াল সেপারেশন ###
+emit_final_ruler: true
+ruler_char: '-'     # সেকশন সেপারেটরের জন্য
+
+### উদাহরণ কনফিগ ###
+example:
+  description: |
+    # --------------------------
+    # MangoEditor CMake ফরম্যাট উদাহরণ
+    # --------------------------
+    project(MangoEditor LANGUAGES CXX)
+    
+    # বাংলা ভাষা সাপোর্ট যোগ করছে
+    if(ENABLE_BANGLA)
+      mango_enable_bangla(
+        FONT_DIR "${PROJECT_SOURCE_DIR}/fonts"
+        NLP_MODEL "bangla-nlp"
+      )
+    endif()
